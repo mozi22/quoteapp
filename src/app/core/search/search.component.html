@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="input-group mb-3">
+        <input
+          placeholder="Your Query..."
+          type="text"
+          class="form-control"
+          #queryBox
+          (keyup.enter)="search(queryBox.value)"
+          aria-label="Text input with dropdown button"
+        />
+        <button
+          class="btn btn-outline-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ getSelectedFilter().name }}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li *ngFor="let fff of filters" (click)="changeFilter(fff)">
+            <a class="dropdown-item" href="#">{{ fff.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mt-4">
+      <h4 class="text-muted fw-bold">Quotes:</h4>
+    </div>
+    <div class="col-12" *ngIf="!loading; else loadingTemp">
+      <ul class="list-group">
+        <li
+          class="list-group-item mt-2"
+          *ngFor="let quote of quoteService.quotes"
+        >
+          <figure class="mb-0">
+            <blockquote class="blockquote">
+              <p>{{ quote.quote }}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer mb-0">
+              {{ quote.actorName }} - {{ quote.movieName }}
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </div>
+    <ng-template #loadingTemp>
+      <div class="col-12 text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

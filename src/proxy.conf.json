@@ -1,0 +1,11 @@
+{
+  "/apiMunich": {
+    "target": "http://localhost:5000",
+    "secure": true,
+    "pathRewrite": {
+      "^/apiMunich": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
